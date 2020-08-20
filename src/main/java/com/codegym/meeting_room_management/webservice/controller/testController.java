@@ -16,6 +16,11 @@ public class testController {
     @Autowired
     testService testService;
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String helloPage() {
+        return "Xin chào C0220G1";
+    }
+
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ResponseEntity<List<test>> listTest() {
         List<test> tests = testService.findAll();
