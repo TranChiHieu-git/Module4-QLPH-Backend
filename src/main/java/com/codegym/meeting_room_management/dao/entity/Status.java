@@ -3,20 +3,19 @@ package com.codegym.meeting_room_management.dao.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "info")
-public class test {
-
+@Table(name = "status")
+public class Status {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
     @Column(name = "name")
-    String name;
+    private String name;
 
-    public test() {
+    public Status() {
     }
 
-    public test(String name) {
+    public Status(String name) {
         this.name = name;
     }
 
