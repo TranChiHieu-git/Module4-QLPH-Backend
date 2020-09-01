@@ -1,43 +1,37 @@
 package com.codegym.meeting_room_management.dao.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "region")
 public class Region {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int idRegion;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @Column(name = "name")
-    private String regionName;
-    @OneToMany(mappedBy = "region")
-    private List<Room> roomList;
+    private String name;
 
     public Region() {
     }
 
-    public Region(int idRegion, String regionName, List<Room> roomList) {
-        this.idRegion = idRegion;
-        this.regionName = regionName;
-        this.roomList = roomList;
+    public Region(String name) {
+        this.name = name;
     }
 
-    public int getIdRegion() {
-        return idRegion;
+    public int getId() {
+        return id;
     }
 
-    public void setIdRegion(int idRegion) {
-        this.idRegion = idRegion;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getRegionName() {
-        return regionName;
+    public String getName() {
+        return name;
     }
 
-    public void setRegionName(String regionName) {
-        this.regionName = regionName;
+    public void setName(String name) {
+        this.name = name;
     }
-
 }

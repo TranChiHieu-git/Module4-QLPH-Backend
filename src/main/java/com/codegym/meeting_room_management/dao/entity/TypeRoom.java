@@ -39,5 +39,4 @@ public class TypeRoom {
     public void setNameTypeRoom(String nameTypeRoom) {
         this.nameTypeRoom = nameTypeRoom;
     }
-
 }
