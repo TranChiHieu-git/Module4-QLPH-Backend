@@ -1,6 +1,4 @@
 package com.codegym.meeting_room_management.dao.entity;
-
-import javax.management.relation.Role;
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +12,7 @@ public class User {
     private String username;
     @Column(name = "fullName")
     private String fullName;
+
     @Column(name = "password")
     private String password;
     @Column(name = "position")
@@ -31,6 +30,7 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
 
     public User() {
     }
@@ -92,4 +92,5 @@ public class User {
     public void setDeleteFlag(boolean deleteFlag) {
         this.deleteFlag = deleteFlag;
     }
+
 }
