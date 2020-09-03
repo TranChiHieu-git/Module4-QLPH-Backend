@@ -3,7 +3,7 @@ package com.codegym.meeting_room_management.dao.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "meeting_room_asset")
+@Table(name = "room")
 public class Room {
     @Id
     @Column(name = "id")
@@ -28,7 +28,6 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "id_status")
     private Status status;
-
     public Room() {
     }
 
