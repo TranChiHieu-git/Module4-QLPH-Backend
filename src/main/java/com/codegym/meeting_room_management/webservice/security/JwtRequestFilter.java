@@ -21,7 +21,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Autowired
     JwtTokenUtil jwtTokenUtil;
-    @Autowired
+
+    @Autowired(required = false)
     UserServiceHaiKSImpl userDetailService;
 
     @Override

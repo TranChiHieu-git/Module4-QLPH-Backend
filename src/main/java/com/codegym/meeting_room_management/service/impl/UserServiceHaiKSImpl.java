@@ -15,11 +15,12 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 @Service
-public class UserServiceHaiKSImpl implements UserDetailsService, UserServiceHaiKS {
+public class UserServiceHaiKSImpl implements UserDetailsService{
     @Autowired
     UserRepositoryHaiKS userRepositoryHaiKS;
+
     @Override
-    public UserDetails loadAccountByAccountName(String accountName) {
+    public UserDetails loadUserByUsername(String accountName) throws UsernameNotFoundException {
         User user =userRepositoryHaiKS.findAllByUsername(accountName);
         if (user == null) {
             throw new UsernameNotFoundException("Không thể tìm thấy tên đăng nhập: " + accountName);
@@ -31,10 +32,5 @@ public class UserServiceHaiKSImpl implements UserDetailsService, UserServiceHaiK
                 user.getUsername(),
                 user.getPassword(),
                 grantedAuthorities);
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
     }
 }

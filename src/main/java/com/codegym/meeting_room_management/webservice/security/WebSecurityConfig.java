@@ -20,15 +20,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
+    @Autowired(required = false)
     UserServiceHaiKSImpl userDetailService;
     @Autowired
-    JwtRequestFilter jwtRequestFilter ;
+    JwtRequestFilter jwtRequestFilter;
     @Autowired
-    JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint ;
+    JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        // configure AuthenticationManager so that it knows from where to load
+        // user for matching credentials
+        // Use BCryptPasswordEncoder
         auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
     }
 
@@ -42,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
@@ -50,10 +54,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll().and().
-        authorizeRequests().antMatchers("/admin","/api/admin/*").access("hasRole('ROLE_ADMIN')").and().
-        authorizeRequests().antMatchers("/user","/user-manage","/user-order","/customer-account/*").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')").
-                anyRequest().authenticated()
+                .antMatchers("/").permitAll().and().
+                authorizeRequests().antMatchers("/admin","/api/admin/*","/admin/*").access("hasRole('ROLE_ADMIN')").and().
+                authorizeRequests().antMatchers("/user","/user/*").access("hasRole('ROLE_USER')")
+                .anyRequest().authenticated()
                 .and().cors();
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

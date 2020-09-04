@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*", exposedHeaders = "Authorization")
 @RequestMapping("")
-public class UserControllerHaiKS {
+public class LoginControllerHaiKS {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -24,6 +24,7 @@ public class UserControllerHaiKS {
 
     @PostMapping("/")
     public ResponseEntity<?> login(@RequestBody AccountDTO accountDTO) {
+        System.out.println(accountDTO.getAccountName());
         System.out.println(accountDTO.getAccountPassword());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(accountDTO.getAccountName(), accountDTO.getAccountPassword())
