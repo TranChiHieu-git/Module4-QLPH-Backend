@@ -19,21 +19,17 @@ public class SearchController {
     @Autowired
     StatusService statusService;
     @Autowired
-    TypeMeetingService typeMeetingService;
-    @Autowired
     TypeRoomService typeRoomService;
 
     @RequestMapping(value = "/user/search-room", method = RequestMethod.GET, params = {"typemeeting", "region",
-            "dayinweek", "startday", "endday", "starttime", "endtime", "numberofuser", "asset"})
+            "startdate", "enddate", "numberofuser", "asset"})
     public ResponseEntity<List<Room>> listRoomResultSearch(@RequestParam("typemeeting") String typeMeeting,
                                                            @RequestParam("region") String region,
-                                                           @RequestParam("dayinweek") String dayInWeek,
-                                                           @RequestParam("startday") String startday,
-                                                           @RequestParam("endday") String endday,
-                                                           @RequestParam("starttime") String starttime,
-                                                           @RequestParam("endtime") String endtime,
+                                                           @RequestParam("startdate") String startdate,
+                                                           @RequestParam("enddate") String enddate,
                                                            @RequestParam("numberofuser") String numberOfUser,
                                                            @RequestParam("asset") String asset) {
+        System.out.println("get value: " + typeMeeting + " " + region + " " + startdate + " " + enddate + " " + numberOfUser + " " + asset);
         return new ResponseEntity<>(roomService.findList(), HttpStatus.OK);
     }
 
@@ -46,11 +42,6 @@ public class SearchController {
     @RequestMapping(value = "/get/status", method = RequestMethod.GET)
     public ResponseEntity<List<Status>> listStatus() {
         return new ResponseEntity<>(statusService.findList(), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/get/typemeeting", method = RequestMethod.GET)
-    public ResponseEntity<List<TypeMeeting>> listTypeMeeting() {
-        return new ResponseEntity<>(typeMeetingService.findList(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/get/typeroom", method = RequestMethod.GET)

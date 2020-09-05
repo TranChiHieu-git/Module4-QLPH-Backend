@@ -10,12 +10,8 @@ public class BookingRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_booking")
     private int idBooking;
-    @Column(name = "booking_day")
-    private Date bookingDate;
-    @Column(name = "start_day")
-    private Date startDate;
-    @Column(name = "end_day")
-    private Date endDate;
+    @Column(name = "create_booking_day")
+    private Date createBookingDate;
     @Column(name = "start_time")
     private Date startTime;
     @Column(name = "end_time")
@@ -27,9 +23,6 @@ public class BookingRoom {
     @Column(name = "booking_status")
     private String bookingStatus;
     @ManyToOne
-    @JoinColumn(name = "id_type_meeting")
-    private TypeMeeting typeMeeting;
-    @ManyToOne
     @JoinColumn(name = "id_room")
     private Room room;
     @ManyToOne
@@ -39,18 +32,14 @@ public class BookingRoom {
     public BookingRoom() {
     }
 
-    public BookingRoom(Date bookingDate, Date startDate, Date endDate, Date startTime, Date endTime,
-                       String descriptionMeeting, boolean deleteFlag, String bookingStatus, TypeMeeting typeMeeting,
-                       Room room, User user) {
-        this.bookingDate = bookingDate;
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public BookingRoom(Date createBookingDate, Date startTime, Date endTime, String descriptionMeeting,
+                       boolean deleteFlag, String bookingStatus, Room room, User user) {
+        this.createBookingDate = createBookingDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.descriptionMeeting = descriptionMeeting;
         this.deleteFlag = deleteFlag;
         this.bookingStatus = bookingStatus;
-        this.typeMeeting = typeMeeting;
         this.room = room;
         this.user = user;
     }
@@ -63,28 +52,12 @@ public class BookingRoom {
         this.idBooking = idBooking;
     }
 
-    public Date getBookingDate() {
-        return bookingDate;
+    public Date getCreateBookingDate() {
+        return createBookingDate;
     }
 
-    public void setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setCreateBookingDate(Date createBookingDate) {
+        this.createBookingDate = createBookingDate;
     }
 
     public Date getStartTime() {
@@ -125,14 +98,6 @@ public class BookingRoom {
 
     public void setBookingStatus(String bookingStatus) {
         this.bookingStatus = bookingStatus;
-    }
-
-    public TypeMeeting getTypeMeeting() {
-        return typeMeeting;
-    }
-
-    public void setTypeMeeting(TypeMeeting typeMeeting) {
-        this.typeMeeting = typeMeeting;
     }
 
     public Room getRoom() {
