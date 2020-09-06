@@ -14,7 +14,12 @@ public class RoomServiceImpl implements RoomService {
     RoomRepository roomRepository;
 
     @Override
-    public List<Room> findList(String typeMeeting, String region, String startdate, String enddate, String numberOfUser, String asset) {
+    public List<Room> findListWithValue(String typeMeeting, String region, String startdate, String enddate, String numberOfUser, String asset) {
         return roomRepository.findAllByTypeRoom_IdTypeRoomAndRegion_IdAndCapacityGreaterThanEqualAndDeleteFlagIsFalse(Integer.parseInt(typeMeeting), Integer.parseInt(region), Integer.parseInt(numberOfUser));
+    }
+
+    @Override
+    public List<Room> findList() {
+        return roomRepository.findAll();
     }
 }
