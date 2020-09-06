@@ -34,7 +34,6 @@ public class BookingRoom {
     @Column(name = "booking_status")
     private String bookingStatus;
 
-
     @ManyToOne
     @JoinColumn(name = "id_room")
     private Room room;
@@ -47,6 +46,7 @@ public class BookingRoom {
     private String requestOther;
 
     public BookingRoom() {
+
     }
 
     public int getIdBooking() {
