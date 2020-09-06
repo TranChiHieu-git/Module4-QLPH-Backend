@@ -7,38 +7,48 @@ import javax.persistence.*;
 public class MeetingRoomAsset {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_room")
-    private int idRoom;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_asset")
-    private int idAsset;
+    @Column(name = "id")
+    private int id;
+    @ManyToOne
+    @JoinColumn(name = "id_room")
+    private Room room;
+    @ManyToOne
+    @JoinColumn(name = "id_asset")
+    private Asset asset;
     @Column(name = "quantity_user")
     private int quantityUser;
 
     public MeetingRoomAsset() {
     }
 
-    public MeetingRoomAsset(int idRoom, int idAsset, int quantityUser) {
-        this.idRoom = idRoom;
-        this.idAsset = idAsset;
+    public MeetingRoomAsset(Room room, Asset asset, int quantityUser) {
+        this.room = room;
+        this.asset = asset;
         this.quantityUser = quantityUser;
     }
 
-    public int getIdRoom() {
-        return idRoom;
+    public int getId() {
+        return id;
     }
 
-    public void setIdRoom(int idRoom) {
-        this.idRoom = idRoom;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getIdAsset() {
-        return idAsset;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setIdAsset(int idAsset) {
-        this.idAsset = idAsset;
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Asset getAsset() {
+        return asset;
+    }
+
+    public void setAsset(Asset asset) {
+        this.asset = asset;
     }
 
     public int getQuantityUser() {
