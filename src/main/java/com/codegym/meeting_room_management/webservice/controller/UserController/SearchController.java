@@ -29,8 +29,8 @@ public class SearchController {
                                                            @RequestParam("enddate") String enddate,
                                                            @RequestParam("numberofuser") String numberOfUser,
                                                            @RequestParam("asset") String asset) {
-        System.out.println("get value: " + typeMeeting + " " + region + " " + startdate + " " + enddate + " " + numberOfUser + " " + asset);
-        return new ResponseEntity<>(roomService.findList(), HttpStatus.OK);
+        System.out.println(typeMeeting+" "+region+" "+numberOfUser);
+        return new ResponseEntity<>(roomService.findList(typeMeeting, region, startdate, enddate, numberOfUser, asset), HttpStatus.OK);
     }
 
     //============================================ get support table ================================================
