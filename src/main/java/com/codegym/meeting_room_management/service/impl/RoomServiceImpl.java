@@ -7,10 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class RoomServiceImpl implements RoomService {
     @Autowired
     RoomRepository roomRepository;
+
+    @Override
+    public List<Room> findListWithValue(String typeMeeting, String region, String startdate, String enddate, String numberOfUser, String asset) {
+        return roomRepository.findAllByTypeRoom_IdTypeRoomAndRegion_IdAndCapacityGreaterThanEqualAndDeleteFlagIsFalse(Integer.parseInt(typeMeeting), Integer.parseInt(region), Integer.parseInt(numberOfUser));
+    }
 
     @Override
     public List<Room> findList() {
