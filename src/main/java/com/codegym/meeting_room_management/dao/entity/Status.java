@@ -9,35 +9,34 @@ public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int idStatus;
+    private int id;
     @Column(name = "name")
-    private String statusName;
+    private String name;
     @OneToMany(mappedBy = "status")
     private List<Room> roomList;
 
     public Status() {
     }
 
-    public Status(int idStatus, String statusName, List<Room> roomList) {
-        this.idStatus = idStatus;
-        this.statusName = statusName;
+    public Status(int id, String name, List<Room> roomList) {
+        this.id = id;
+        this.name = name;
         this.roomList = roomList;
     }
 
-    public int getIdStatus() {
-        return idStatus;
+    public int getId() {
+        return id;
     }
 
-    public void setIdStatus(int idRoomStatus) {
-        this.idStatus = idRoomStatus;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getStatusName() {
-        return statusName;
+    public String getName() {
+        return name;
     }
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setName(String name) {
+        this.name = name;
     }
-
 }
