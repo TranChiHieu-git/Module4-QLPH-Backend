@@ -9,14 +9,11 @@ public class Region {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "name")
     private String name;
 
     public Region() {
-    }
-
-    public Region(String name) {
-        this.name = name;
     }
 
     public int getId() {
