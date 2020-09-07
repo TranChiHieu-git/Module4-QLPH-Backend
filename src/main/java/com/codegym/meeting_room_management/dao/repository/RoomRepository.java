@@ -6,4 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room,Integer> {
+    /**
+     * @return Room
+     * @author huylm
+     */
+    Room findByIdAndDeleteFlagIsFalse(int id);
 }

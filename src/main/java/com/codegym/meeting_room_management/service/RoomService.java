@@ -6,4 +6,10 @@ import java.util.List;
 
 public interface RoomService {
     List<Room> findList();
+
+    /**
+     * @return Room
+     * @author huylm
+     */
+    Room findByIdAndDeleteFlagIsFalse(int id);
 }
