@@ -7,9 +7,14 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface RoomService {
-    List<Room> findAllRoom();
+    Page<Room> searchAllRoom(Pageable pageable,  String name, Integer floor, Integer capacity, String typeRoom, String region, String status);
     void save(Room room);
     void delete(Room room);
     Room findById(Integer id);
-    Page<Room> findAllByRoomNameContainingAndAndDeleteFlagIsFalse(Pageable pageable, String search);
+    Page<Room> findAllByNameContainingAndAndDeleteFlagIsFalse(Pageable pageable, String search);
+    Page<Room> findAllRoom(Pageable pageable);
+    Page<Room> searchFloorNull(Pageable pageable,  String name, Integer capacity, String typeRoom, String region, String status);
+    Page<Room> searchCapacityNull(Pageable pageable,  String name, Integer floor, String typeRoom, String region, String status);
+    Page<Room> searchAllNull(Pageable pageable,  String name, String typeRoom, String region, String status);
+
 }

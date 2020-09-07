@@ -10,14 +10,11 @@ public class Region {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "name")
-    private String name;
+    private String regionName;
 
     public Region() {
     }
 
-    public Region(String name) {
-        this.name = name;
-    }
 
     public int getId() {
         return id;
@@ -27,11 +24,11 @@ public class Region {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getRegionName() {
+        return regionName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRegionName(String regionName) {
+        this.regionName = regionName;
     }
 }

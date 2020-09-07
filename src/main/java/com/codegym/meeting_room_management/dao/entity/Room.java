@@ -10,13 +10,13 @@ public class Room {
     @Column(name = "id")
     private int id;
     @Column(name = "name")
-    private String roomName;
+    private String name;
     @Column(name = "area")
-    private float roomArea;
+    private float area;
     @Column(name = "floor")
-    private int roomFloor;
+    private int floor;
     @Column(name = "capacity")
-    private int roomCapacity;
+    private int capacity;
     //        @Column(name = "number_of_uses")
 //    private int numberOfUses;
     @Column(name = "delete_flag")
@@ -39,10 +39,10 @@ public class Room {
     public Room(int id, String roomName, float roomArea, int roomFloor, int roomCapacity,
                 boolean deleteFlag, TypeRoom typeRoom, Region region, Status status) {
         this.id = id;
-        this.roomName = roomName;
-        this.roomArea = roomArea;
-        this.roomFloor = roomFloor;
-        this.roomCapacity = roomCapacity;
+        this.name = roomName;
+        this.area = roomArea;
+        this.floor = roomFloor;
+        this.capacity = roomCapacity;
         this.deleteFlag = deleteFlag;
         this.typeRoom = typeRoom;
         this.region = region;
@@ -57,37 +57,36 @@ public class Room {
         this.id = id;
     }
 
-
-    public String getRoomName() {
-        return roomName;
+    public String getName() {
+        return name;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public float getRoomArea() {
-        return roomArea;
+    public float getArea() {
+        return area;
     }
 
-    public void setRoomArea(float roomArea) {
-        this.roomArea = roomArea;
+    public void setArea(float area) {
+        this.area = area;
     }
 
-    public int getRoomFloor() {
-        return roomFloor;
+    public int getFloor() {
+        return floor;
     }
 
-    public void setRoomFloor(int roomFloor) {
-        this.roomFloor = roomFloor;
+    public void setFloor(int floor) {
+        this.floor = floor;
     }
 
-    public int getRoomCapacity() {
-        return roomCapacity;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setRoomCapacity(int roomCapacity) {
-        this.roomCapacity = roomCapacity;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     public boolean isDeleteFlag() {
