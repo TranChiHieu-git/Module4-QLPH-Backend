@@ -32,6 +32,9 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "id_status")
     private Status status;
+    @Column(name = "asset")
+    private String asset;
+
     public Room() {
     }
 
@@ -46,6 +49,14 @@ public class Room {
         this.typeRoom = typeRoom;
         this.region = region;
         this.status = status;
+    }
+
+    public String getAsset() {
+        return asset;
+    }
+
+    public void setAsset(String asset) {
+        this.asset = asset;
     }
 
     public int getId() {

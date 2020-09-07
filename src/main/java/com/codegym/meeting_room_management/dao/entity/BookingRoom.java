@@ -44,9 +44,29 @@ public class BookingRoom {
 
     @Column(name = "request_other")
     private String requestOther;
+    @Column(name = "start_day")
+    private Date startDay;
 
+    @Column(name = "end_day")
+    private Date endDay;
     public BookingRoom() {
 
+    }
+
+    public Date getStartDay() {
+        return startDay;
+    }
+
+    public void setStartDay(Date startDay) {
+        this.startDay = startDay;
+    }
+
+    public Date getEndDay() {
+        return endDay;
+    }
+
+    public void setEndDay(Date endDay) {
+        this.endDay = endDay;
     }
 
     public int getIdBooking() {
