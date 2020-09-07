@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.codegym.meeting_room_management.dao.entity.Room;
 import com.codegym.meeting_room_management.dao.repository.RoomRepository;
 import com.codegym.meeting_room_management.service.RoomService;
+import java.util.List;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -57,5 +58,14 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public Page<Room> searchAllNull(Pageable pageable, String name, String typeRoom, String region, String status) {
         return roomRepository.findAllByNameContainingAndFloorLessThanEqualAndCapacityLessThanEqualAndTypeRoom_NameTypeRoomContainingAndRegion_RegionNameContainingAndStatus_StatusNameContainingAndDeleteFlagIsFalse(pageable, name, 20, 20, typeRoom, region, status);
+    }
+    @Override
+    public List<Room> findListWithValue(String typeMeeting, String region, String startdate, String enddate, String numberOfUser, String asset) {
+        return roomRepository.findAllByTypeRoom_IdTypeRoomAndRegion_IdAndCapacityGreaterThanEqualAndDeleteFlagIsFalse(Integer.parseInt(typeMeeting), Integer.parseInt(region), Integer.parseInt(numberOfUser));
+    }
+
+    @Override
+    public List<Room> findList() {
+        return roomRepository.findAll();
     }
 }

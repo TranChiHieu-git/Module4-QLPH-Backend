@@ -20,24 +20,24 @@ public class RoomController {
     //    list room search
     @RequestMapping(value = "/admin/room-search", method = RequestMethod.GET)
     public ResponseEntity<Page<Room>> listRoomSearch(@RequestParam("page") int page,
-                                               @RequestParam("size") int size,
-                                               @RequestParam("name") String name,
-                                               @RequestParam("floor") Integer floor,
-                                               @RequestParam("capacity") Integer capacity,
-                                               @RequestParam("typeRoom") String typeRoom,
-                                               @RequestParam("region") String region,
-                                               @RequestParam("status") String status) {
+                                                     @RequestParam("size") int size,
+                                                     @RequestParam("name") String name,
+                                                     @RequestParam("floor") Integer floor,
+                                                     @RequestParam("capacity") Integer capacity,
+                                                     @RequestParam("typeRoom") String typeRoom,
+                                                     @RequestParam("region") String region,
+                                                     @RequestParam("status") String status) {
         Page<Room> roomPage;
-        if(floor != null && capacity != null){
+        if (floor != null && capacity != null) {
             roomPage = roomService.searchAllRoom(PageRequest.of(page, size, Sort.by("id").ascending()),
                     name, floor, capacity, typeRoom, region, status);
-        }else if(floor == null && capacity != null){
+        } else if (floor == null && capacity != null) {
             roomPage = roomService.searchFloorNull(PageRequest.of(page, size, Sort.by("id").ascending()),
                     name, capacity, typeRoom, region, status);
-        }else if(floor != null && capacity == null){
+        } else if (floor != null && capacity == null) {
             roomPage = roomService.searchCapacityNull(PageRequest.of(page, size, Sort.by("id").ascending()),
                     name, floor, typeRoom, region, status);
-        }else {
+        } else {
             roomPage = roomService.searchAllNull(PageRequest.of(page, size, Sort.by("id").ascending()),
                     name, typeRoom, region, status);
         }

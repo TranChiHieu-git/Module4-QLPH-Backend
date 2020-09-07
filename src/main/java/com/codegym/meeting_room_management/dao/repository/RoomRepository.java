@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface RoomRepository extends JpaRepository<Room, Integer> {
     Page<Room> findAllByDeleteFlagIsFalse(Pageable pageable);
 
@@ -15,13 +17,18 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     Page<Room> findAllByNameContainingAndFloorAndCapacityAndTypeRoom_NameTypeRoomContainingAndRegion_RegionNameContainingAndStatus_StatusNameContainingAndDeleteFlagIsFalse(
             Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
     );
+
     Page<Room> findAllByNameContainingAndFloorLessThanEqualAndCapacityLessThanEqualAndTypeRoom_NameTypeRoomContainingAndRegion_RegionNameContainingAndStatus_StatusNameContainingAndDeleteFlagIsFalse(
             Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
     );
+
     Page<Room> findAllByNameContainingAndFloorLessThanEqualAndCapacityAndTypeRoom_NameTypeRoomContainingAndRegion_RegionNameContainingAndStatus_StatusNameContainingAndDeleteFlagIsFalse(
             Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
     );
+
     Page<Room> findAllByNameContainingAndFloorAndCapacityLessThanEqualAndTypeRoom_NameTypeRoomContainingAndRegion_RegionNameContainingAndStatus_StatusNameContainingAndDeleteFlagIsFalse(
             Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
     );
+
+    List<Room> findAllByTypeRoom_IdTypeRoomAndRegion_IdAndCapacityGreaterThanEqualAndDeleteFlagIsFalse(int typeroom, int region, int capacity);
 }

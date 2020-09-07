@@ -3,7 +3,6 @@ package com.codegym.meeting_room_management.service;
 import com.codegym.meeting_room_management.dao.entity.Room;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
 import java.util.List;
 
 public interface RoomService {
@@ -16,5 +15,6 @@ public interface RoomService {
     Page<Room> searchFloorNull(Pageable pageable,  String name, Integer capacity, String typeRoom, String region, String status);
     Page<Room> searchCapacityNull(Pageable pageable,  String name, Integer floor, String typeRoom, String region, String status);
     Page<Room> searchAllNull(Pageable pageable,  String name, String typeRoom, String region, String status);
-
+    List<Room> findListWithValue(String typeMeeting,String region, String startdate, String enddate, String numberOfUser, String asset);
+    List<Room> findList();
 }
