@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserNotificationServiceImpl implements UserNotificationService {
     @Autowired
@@ -31,6 +33,11 @@ public class UserNotificationServiceImpl implements UserNotificationService {
     @Override
     public void deleteById(int id) {
         userNotificationRepository.deleteById(id);
+    }
+
+    @Override
+    public List<UserNotification> getAllByDeleteFlagIsFalse(int id) {
+        return userNotificationRepository.getAllByDeleteFlagIsFalse(id);
     }
 
 }

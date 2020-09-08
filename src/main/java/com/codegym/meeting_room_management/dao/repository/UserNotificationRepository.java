@@ -26,7 +26,10 @@ public interface UserNotificationRepository extends JpaRepository<UserNotificati
     @Transactional
     @Query(value = "update UserNotification u set u.deleteFlag=true where u.id =?1")
     void deleteById(int id);
+
     @Query(value = "select u from UserNotification u where u.user.id=?1 and u.deleteFlag = false")
     Page<UserNotification> getAllByUserIDDeleteFlagIsFalse(int id, Pageable pageable);
 
+    @Query(value = "select u from UserNotification u where u.user.id=?1 and u.seen = false")
+    List<UserNotification> getAllByDeleteFlagIsFalse(int id);
 }
