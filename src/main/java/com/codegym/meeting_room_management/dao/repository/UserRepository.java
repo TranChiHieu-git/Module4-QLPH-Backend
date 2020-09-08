@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Integer> {
     Page<User> findAllByDeleteFlagIsFalse(Pageable pageable);
     User findByUsername(String username);
+    Page<User> findAllByUsernameContainingOrPositionOrFullName_AndDeleteFlagIsFalse(String key1, String key2, String key3, Pageable pageable);
 }

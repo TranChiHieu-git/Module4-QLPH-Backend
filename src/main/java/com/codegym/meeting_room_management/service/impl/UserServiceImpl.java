@@ -22,12 +22,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Page<User> findAllUserWithPage(String key, Pageable pageable) {
+        return userRepository.findAllByUsernameContainingOrPositionOrFullName_AndDeleteFlagIsFalse(key, key, key, pageable);
+    }
+
+
+    @Override
     public User findGetId(int id) {
         return userRepository.findById(id).orElse(null);
     }
 
     @Override
-    public User findUserByAccountName(String username) {
+    public User findUserByUserName(String username) {
         return userRepository.findByUsername(username);
     }
 

@@ -5,14 +5,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "meeting_room_assat")
 public class MeetingRoomAsset {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    @EmbeddedId
+    private MeetingRoomAssetKey id;
     @ManyToOne
+    @MapsId("idRoom")
     @JoinColumn(name = "id_room")
     private Room room;
     @ManyToOne
+    @MapsId("idAsset")
     @JoinColumn(name = "id_asset")
     private Asset asset;
     @Column(name = "quantity_user")
@@ -27,11 +27,11 @@ public class MeetingRoomAsset {
         this.quantityUser = quantityUser;
     }
 
-    public int getId() {
+    public MeetingRoomAssetKey getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(MeetingRoomAssetKey id) {
         this.id = id;
     }
 

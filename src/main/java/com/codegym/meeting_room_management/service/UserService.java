@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface UserService {
     Page<User> findAllUserByDeleteFlagIsFalse(Pageable pageable);
+    Page<User> findAllUserWithPage(String key, Pageable pageable);
 
     User findGetId(int id);
 
