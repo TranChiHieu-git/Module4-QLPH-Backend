@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepositoryHaiKS extends JpaRepository<User, Integer> {
+
     User findAllByUsername(String name);
 }

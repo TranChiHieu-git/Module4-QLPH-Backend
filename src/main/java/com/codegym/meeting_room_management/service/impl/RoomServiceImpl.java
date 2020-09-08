@@ -68,4 +68,9 @@ public class RoomServiceImpl implements RoomService {
     public List<Room> findList() {
         return roomRepository.findAll();
     }
+
+    @Override
+    public Room findByIdAndDeleteFlagIsFalse(int id) {
+        return roomRepository.findByIdAndDeleteFlagIsFalse(id);
+    }
 }
