@@ -3,7 +3,6 @@ package com.codegym.meeting_room_management.service.impl;
 import com.codegym.meeting_room_management.dao.entity.Role;
 import com.codegym.meeting_room_management.dao.entity.User;
 import com.codegym.meeting_room_management.dao.repository.UserRepositoryHaiKS;
-import com.codegym.meeting_room_management.service.UserServiceHaiKS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

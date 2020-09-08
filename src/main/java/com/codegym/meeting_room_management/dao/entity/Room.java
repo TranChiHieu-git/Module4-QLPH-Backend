@@ -6,8 +6,8 @@ import javax.persistence.*;
 @Table(name = "room")
 public class Room {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
     @Column(name = "name")
     private String name;
@@ -17,30 +17,46 @@ public class Room {
     private int floor;
     @Column(name = "capacity")
     private int capacity;
+    //        @Column(name = "number_of_uses")
+//    private int numberOfUses;
     @Column(name = "delete_flag")
     private boolean deleteFlag;
+
     @ManyToOne
     @JoinColumn(name = "id_type_room")
     private TypeRoom typeRoom;
     @ManyToOne
     @JoinColumn(name = "id_region")
     private Region region;
+
     @ManyToOne
     @JoinColumn(name = "id_status")
     private Status status;
+    @Column(name = "asset")
+    private String asset;
+
     public Room() {
     }
 
-    public Room(String name, float area, int floor, int capacity, boolean deleteFlag, TypeRoom typeRoom,
-                Region region, Status status) {
-        this.name = name;
-        this.area = area;
-        this.floor = floor;
-        this.capacity = capacity;
+    public Room(int id, String roomName, float roomArea, int roomFloor, int roomCapacity,
+                boolean deleteFlag, TypeRoom typeRoom, Region region, Status status) {
+        this.id = id;
+        this.name = roomName;
+        this.area = roomArea;
+        this.floor = roomFloor;
+        this.capacity = roomCapacity;
         this.deleteFlag = deleteFlag;
         this.typeRoom = typeRoom;
         this.region = region;
         this.status = status;
+    }
+
+    public String getAsset() {
+        return asset;
+    }
+
+    public void setAsset(String asset) {
+        this.asset = asset;
     }
 
     public int getId() {
