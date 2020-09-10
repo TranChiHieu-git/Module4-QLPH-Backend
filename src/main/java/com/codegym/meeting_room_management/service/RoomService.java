@@ -16,5 +16,5 @@ public interface RoomService {
     Page<Room> searchCapacityNull(Pageable pageable,  String name, Integer floor, String typeRoom, String region, String status);
     Page<Room> searchAllNull(Pageable pageable,  String name, String typeRoom, String region, String status);
     List<Room> findList();
-    List<Room> findListWithValue(String typeMeeting, String region, String startdate, String enddate, String numberOfUser, String asset);
+    List<Room> findListWithValue(String typeMeeting, String region, String startdate, String enddate, String numberOfUser);
 }
