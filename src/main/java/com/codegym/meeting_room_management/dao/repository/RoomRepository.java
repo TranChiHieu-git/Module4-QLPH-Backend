@@ -11,46 +11,91 @@ import java.util.List;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Integer> {
+    @Query(value = "SELECT Room.id, Room.name, Room.area, Room.floor, Room.capacity, Room.delete_flag, " +
+            "Room.id_type_room, Room.id_region, Room.id_status FROM Room left join booking_room " +
+            "on room.id = booking_room.id_room WHERE (Room.id_type_room like ?1 AND Room.id_region " +
+            "like ?2 AND Room.capacity >= ?3 AND Room.delete_flag = 0) " +
+            "and Room.id  not in ( select booking_room.id_room from booking_room where (" +
+            "(booking_room.start_day = ?4 and booking_room.end_day = ?6) and ((" +
+            "(booking_room.start_time <= ?5 and ?5 <= booking_room.end_time) or" +
+            "(booking_room.start_time <= ?7 and ?7 <= booking_room.end_time)))) " +
+            "group by booking_room.id_booking)" +
+            "group by Room.id"
+            , nativeQuery = true)
+    List<Room> findListWithValueOnce(String typeroom, String region, int capacity,
+                                     String startDay, String startTime, String endDay, String endTime);
 
-        /**
-         * @return Room
-         * @author huylm
-         */
-        Room findByIdAndDeleteFlagIsFalse(int id);
+    @Query(value = "SELECT Room.id, Room.name, Room.area, Room.floor, Room.capacity, Room.delete_flag, " +
+            "Room.id_type_room, Room.id_region, Room.id_status FROM Room left join booking_room " +
+            "on room.id = booking_room.id_room WHERE (Room.id_type_room like ?1 AND Room.id_region " +
+            "like ?2 AND Room.capacity >= ?3 AND Room.delete_flag = 0) " +
+            "and Room.id  not in ( select booking_room.id_room from booking_room where (" +
+            "(((booking_room.start_day <= ?4) and  (?4 <= booking_room.end_day)) or" +
+            "((booking_room.start_day <= ?6) and (?6 <= booking_room.end_day))) and ((" +
+            "(booking_room.start_time <= ?5 and ?5 <= booking_room.end_time) or" +
+            "(booking_room.start_time <= ?7 and ?7 <= booking_room.end_time)))) " +
+            "group by booking_room.id_booking)" +
+            "group by Room.id"
+            , nativeQuery = true)
+    List<Room> findListWithValueDaily(String typeroom, String region, int capacity,
+                                      String startDay, String startTime, String endDay, String endTime);
 
-        List<Room> findAllByTypeRoom_IdTypeRoomAndRegion_IdAndCapacityGreaterThanEqualAndDeleteFlagIsFalse(int typeroom, int region, int capacity);
+    @Query(value = "SELECT Room.id, Room.name, Room.area, Room.floor, Room.capacity, Room.delete_flag, " +
+            "Room.id_type_room, Room.id_region, Room.id_status FROM Room left join booking_room " +
+            "on room.id = booking_room.id_room WHERE (Room.id_type_room like ?1 AND Room.id_region " +
+            "like ?2 AND Room.capacity >= ?3 AND Room.delete_flag = 0) " +
+            "and Room.id  not in ( select booking_room.id_room from booking_room where (" +
+            "(((booking_room.start_day <= ?4) and  (?4 <= booking_room.end_day)) or" +
+            "((booking_room.start_day <= ?6) and (?6 <= booking_room.end_day))) and ((" +
+            "(booking_room.start_time <= ?5 and ?5 <= booking_room.end_time) or" +
+            "(booking_room.start_time <= ?7 and ?7 <= booking_room.end_time)))) " +
+            "group by booking_room.id_booking)" +
+            "group by Room.id"
+            , nativeQuery = true)
+    List<Room> findListWithValueWeekly(String typeroom, String region, int capacity,
+                                       String startDay, String startTime, String endDay, String endTime);
 
-        @Query(value = "SELECT Room.id, Room.name, Room.area, Room.floor, Room.capacity, Room.delete_flag, " +
-                "Room.id_type_room, Room.id_region, Room.id_status, asset.name, group_concat(asset.name, \" \") as asset FROM " +
-                "Room left join booking_room " +
-                "on room.id = booking_room.id_room left join meeting_room_asset " +
-                "on room.id = meeting_room_asset.id_room left join asset " +
-                "on asset.id = meeting_room_asset.id_asset where " +
-                "(Room.id_type_room = ?1 AND Room.id_region = ?2 AND Room.capacity >= ?3 AND Room.delete_flag = 0)" +
-                "And (?4 IN (select id from asset join meeting_room_asset on meeting_room_asset.id_asset = asset.id where id_room = Room.id))" +
-                "GROUP BY Room.id;",
-                nativeQuery = true)
-        List<Room> findListWithValue(int typeroom, int region, int capacity, String asset);
+    @Query(value = "SELECT Room.id, Room.name, Room.area, Room.floor, Room.capacity, Room.delete_flag, " +
+            "Room.id_type_room, Room.id_region, Room.id_status FROM Room left join booking_room on " +
+            "room.id = booking_room.id_room where (Room.id_type_room like ?1 AND Room.id_region like ?2 AND " +
+            "Room.capacity >= ?3 AND Room.delete_flag = 0) and Room.id  not in (select booking_room.id_room from " +
+            "booking_room where ((((booking_room.start_day <= ?4) and  " +
+            "(?4 <= booking_room.end_day)) or ((booking_room.start_day <= ?6) and " +
+            "(?6 <= booking_room.end_day))) and ( booking_room.start_time <= ?5 and " +
+            "?5 <= booking_room.end_time or booking_room.start_time <= ?7 and " +
+            "?7 <= booking_room.end_time)) group by booking_room.id_booking ) group by Room.id;"
+            , nativeQuery = true)
+    List<Room> findListWithValueMonthly(String typeroom, String region, int capacity,
+                                        String startDay, String startTime, String endDay, String endTime);
 
-        Page<Room> findAllByDeleteFlagIsFalse(Pageable pageable);
+    /**
+     * @return Room
+     * @author huylm
+     */
+    Room findByIdAndDeleteFlagIsFalse(int id);
 
-        Room findRoomByIdAndDeleteFlagIsFalse(Integer id);
+    List<Room> findAllByTypeRoom_IdTypeRoomAndRegion_IdAndCapacityGreaterThanEqualAndDeleteFlagIsFalse(int typeroom, int region, int capacity);
 
-        Page<Room> findAllByNameContainingAndDeleteFlagIsFalse(Pageable pageable, String search);
 
-        Page<Room> findAllByNameContainingAndFloorAndCapacityAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(
-                Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
-        );
+    Page<Room> findAllByDeleteFlagIsFalse(Pageable pageable);
 
-        Page<Room> findAllByNameContainingAndFloorLessThanEqualAndCapacityLessThanEqualAndAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(
-                Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
-        );
+    Room findRoomByIdAndDeleteFlagIsFalse(Integer id);
 
-        Page<Room> findAllByNameContainingAndFloorLessThanEqualAndCapacityAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(
-                Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
-        );
+    Page<Room> findAllByNameContainingAndDeleteFlagIsFalse(Pageable pageable, String search);
 
-        Page<Room> findAllByNameContainingAndFloorAndCapacityLessThanEqualAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(
-                Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
-        );
-    }
+    Page<Room> findAllByNameContainingAndFloorAndCapacityAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(
+            Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
+    );
+
+    Page<Room> findAllByNameContainingAndFloorLessThanEqualAndCapacityLessThanEqualAndAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(
+            Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
+    );
+
+    Page<Room> findAllByNameContainingAndFloorLessThanEqualAndCapacityAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(
+            Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
+    );
+
+    Page<Room> findAllByNameContainingAndFloorAndCapacityLessThanEqualAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(
+            Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
+    );
+}
