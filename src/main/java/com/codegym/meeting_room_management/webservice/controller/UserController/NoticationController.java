@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,5 +72,10 @@ public class NoticationController {
     @GetMapping("/user/room/all")
     public ResponseEntity<List<Room>> getAllRoom() {
         return new ResponseEntity<>(this.roomService.findList(), HttpStatus.OK);
+    }
+
+    @GetMapping("user/notification/{id}/notSeen")
+    public List<UserNotification> getAllByDeleteFlagIsFalse(@PathVariable int id){
+        return this.userNotificationService.getAllByDeleteFlagIsFalse(id);
     }
 }

@@ -66,9 +66,12 @@ public class RoomServiceImpl implements RoomService {
         if (numberOfUser.equals("")) {
             numberOfUser = "0";
         }
-        if (Integer.parseInt(numberOfUser) <= 0) {
-            numberOfUser = "0";
+        if (numberOfUser.equals("0")) {
+            if (Integer.parseInt(numberOfUser) <= 0) {
+                numberOfUser = "0";
+            }
         }
+
         if (region.equals("")) {
             region = "%";
         }
@@ -95,5 +98,10 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<Room> findList() {
         return roomRepository.findAll();
+    }
+
+    @Override
+    public Room findByIdAndDeleteFlagIsFalse(int id) {
+        return roomRepository.findByIdAndDeleteFlagIsFalse(id);
     }
 }

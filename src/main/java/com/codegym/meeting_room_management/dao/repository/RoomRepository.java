@@ -68,6 +68,17 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
     List<Room> findListWithValueMonthly(String typeroom, String region, int capacity,
                                         String startDay, String startTime, String endDay, String endTime);
 
+    /**
+     * @return Room
+     * @author huylm
+     */
+    Room findByIdAndDeleteFlagIsFalse(int id);
+
+    List<Room> findAllByTypeRoom_IdTypeRoomAndRegion_IdAndCapacityGreaterThanEqualAndDeleteFlagIsFalse(int typeroom, int region, int capacity);
+
+
+    Page<Room> findAllByDeleteFlagIsFalse(Pageable pageable);
+
     Room findRoomByIdAndDeleteFlagIsFalse(Integer id);
 
     Page<Room> findAllByNameContainingAndDeleteFlagIsFalse(Pageable pageable, String search);

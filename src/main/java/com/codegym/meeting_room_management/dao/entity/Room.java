@@ -49,7 +49,6 @@ public class Room {
         this.status = status;
     }
 
-
     public int getId() {
         return id;
     }
