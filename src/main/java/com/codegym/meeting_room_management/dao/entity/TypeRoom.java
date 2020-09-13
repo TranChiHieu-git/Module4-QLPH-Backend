@@ -1,22 +1,27 @@
 package com.codegym.meeting_room_management.dao.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "type_room")
 public class TypeRoom {
     @Id
-    @Column(name = "id_type_room")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_type_room")
     private int idTypeRoom;
     @Column(name = "name_type_room")
     private String nameTypeRoom;
+    @OneToMany(mappedBy = "typeRoom")
+    private List<Room> roomList;
 
     public TypeRoom() {
     }
 
-    public TypeRoom(String nameTypeRoom) {
+    public TypeRoom(int idTypeRoom, String nameTypeRoom, List<Room> roomList) {
+        this.idTypeRoom = idTypeRoom;
         this.nameTypeRoom = nameTypeRoom;
+        this.roomList = roomList;
     }
 
     public int getIdTypeRoom() {
@@ -35,4 +40,3 @@ public class TypeRoom {
         this.nameTypeRoom = nameTypeRoom;
     }
 }
-

@@ -1,19 +1,19 @@
 package com.codegym.meeting_room_management.dao.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "region")
-public class Region {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+@Table(name = "type_of_notification")
+public class TypeOfNotification {
+@Id
+   int id;
+@Column(name = "type_of_notification_name")
+String name;
 
-    @Column(name = "name")
-    private String name;
-
-    public Region() {
+    public TypeOfNotification() {
     }
 
     public int getId() {

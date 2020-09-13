@@ -26,7 +26,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAllByUsernameContainingOrPositionOrFullName_AndDeleteFlagIsFalse(key, key, key, pageable);
     }
 
-
     @Override
     public User findGetId(int id) {
         return userRepository.findById(id).orElse(null);
@@ -52,5 +51,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getListAllUser() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User findById(int id) {
+        return userRepository.findById(id).orElse(null);
     }
 }

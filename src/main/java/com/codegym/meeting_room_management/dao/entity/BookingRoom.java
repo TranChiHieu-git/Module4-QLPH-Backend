@@ -1,6 +1,9 @@
 package com.codegym.meeting_room_management.dao.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -10,38 +13,47 @@ public class BookingRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_booking")
     private int idBooking;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_booking_day")
-    private Date createBookingDate;
+    private Date createBookingDay;
+
+    @Column(name = "start_day")
+    private Date startDay;
+
+    @Column(name = "end_day")
+    private Date endDay;
+
     @Column(name = "start_time")
-    private Date startTime;
+    private Time startTime;
+
     @Column(name = "end_time")
-    private Date endTime;
+    private Time endTime;
+
+
     @Column(name = "description_meeting")
     private String descriptionMeeting;
+
     @Column(name = "delete_flag")
     private boolean deleteFlag;
+
     @Column(name = "booking_status")
     private String bookingStatus;
+
     @ManyToOne
     @JoinColumn(name = "id_room")
     private Room room;
+
     @ManyToOne
     @JoinColumn(name = "users")
     private User user;
 
-    public BookingRoom() {
-    }
+    @Column(name = "request_other")
+    private String requestOther;
 
-    public BookingRoom(Date createBookingDate, Date startTime, Date endTime, String descriptionMeeting,
-                       boolean deleteFlag, String bookingStatus, Room room, User user) {
-        this.createBookingDate = createBookingDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.descriptionMeeting = descriptionMeeting;
-        this.deleteFlag = deleteFlag;
-        this.bookingStatus = bookingStatus;
-        this.room = room;
-        this.user = user;
+    public BookingRoom() {
+
     }
 
     public int getIdBooking() {
@@ -52,27 +64,43 @@ public class BookingRoom {
         this.idBooking = idBooking;
     }
 
-    public Date getCreateBookingDate() {
-        return createBookingDate;
+    public Date getCreateBookingDay() {
+        return createBookingDay;
     }
 
-    public void setCreateBookingDate(Date createBookingDate) {
-        this.createBookingDate = createBookingDate;
+    public void setCreateBookingDay(Date createBookingDay) {
+        this.createBookingDay = createBookingDay;
     }
 
-    public Date getStartTime() {
+    public Date getStartDay() {
+        return startDay;
+    }
+
+    public void setStartDay(Date startDay) {
+        this.startDay = startDay;
+    }
+
+    public Date getEndDay() {
+        return endDay;
+    }
+
+    public void setEndDay(Date endDay) {
+        this.endDay = endDay;
+    }
+
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
 
@@ -114,5 +142,13 @@ public class BookingRoom {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getRequestOther() {
+        return requestOther;
+    }
+
+    public void setRequestOther(String requestOther) {
+        this.requestOther = requestOther;
     }
 }
