@@ -1,4 +1,5 @@
 package com.codegym.meeting_room_management.dao.entity;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +11,7 @@ public class User {
     private int userId;
     @Column(name = "username")
     private String username;
-    @Column(name = "fullName")
+    @Column(name = "fullname")
     private String fullName;
 
     @Column(name = "password")

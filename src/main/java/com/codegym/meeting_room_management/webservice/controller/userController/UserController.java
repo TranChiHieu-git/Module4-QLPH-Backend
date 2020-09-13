@@ -43,20 +43,19 @@ import java.util.List;
         Role role = roleService.findRoleById(id);
         return role == null ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(role, HttpStatus.OK);
     }
-
-    //------------------------------- list user -------------------------
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> listAllUserList() {
-        List<User> users = userService.getListAllUser();
-        return users.isEmpty() ? new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT) : new ResponseEntity<List<User>>(users, HttpStatus.OK);
-    }
+//
+//    //------------------------------- list user -------------------------
+//    @RequestMapping(value = "/user", method = RequestMethod.GET)
+//    public ResponseEntity<List<User>> listAllUserList() {
+//        List<User> users = userService.getListAllUser();
+//        return users.isEmpty() ? new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT) : new ResponseEntity<List<User>>(users, HttpStatus.OK);
+//    }
 
     //---------------------- list user ---------------------------------
     @RequestMapping(value = "/user", method = RequestMethod.GET, params = {"page", "size", "search"})
     public ResponseEntity<Page<User>> listAllUser(@RequestParam("page") int page,
                                                         @RequestParam("size") int size,
-                                                        @RequestParam("search") String search,
-                                                        @RequestParam("role") String nameRole) {
+                                                        @RequestParam("search") String search){
         Page<User> userPage = userService.findAllUserWithPage(search, PageRequest.of(page, size, Sort.by("userId").ascending()));
         return userPage.isEmpty() ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(userPage, HttpStatus.OK);
     }
@@ -65,10 +64,13 @@ import java.util.List;
     @RequestMapping(value = "/user/create", method = RequestMethod.POST)
     public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder uriComponentsBuilder) {
         User user1 = userService.findUserByUserName(user.getUsername());
+        Role role = roleService.findRoleByRoleName(user.getRole().getRoleName());
         if (user1 != null) {
             throw new UsernameNotFoundException("Tên đăng nhập đã tồn tại");
         } else {
+            System.out.println(user.getPassword());
             user.setPassword((passwordEncoder.encode(user.getPassword())));
+            user.setRole(role);
             userService.save(user);
             HttpHeaders headers = new HttpHeaders();
             headers.setLocation(uriComponentsBuilder.path("user?page=0&size=5&search=").buildAndExpand(user.getUserId()).toUri());
