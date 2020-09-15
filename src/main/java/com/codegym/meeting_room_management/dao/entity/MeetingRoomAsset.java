@@ -3,7 +3,7 @@ package com.codegym.meeting_room_management.dao.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "meeting_room_assat")
+@Table(name = "meeting_room_asset")
 public class MeetingRoomAsset {
     @EmbeddedId
     private MeetingRoomAssetKey id;

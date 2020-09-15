@@ -3,6 +3,7 @@ package com.codegym.meeting_room_management.dao.entity;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 
 @Entity
@@ -18,11 +19,17 @@ public class BookingRoom {
     @Column(name = "create_booking_day")
     private Date createBookingDay;
 
+    @Column(name = "start_day")
+    private Date startDay;
+
+    @Column(name = "end_day")
+    private Date endDay;
+
     @Column(name = "start_time")
-    private Date startTime;
+    private Time startTime;
 
     @Column(name = "end_time")
-    private Date endTime;
+    private Time endTime;
 
 
     @Column(name = "description_meeting")
@@ -65,19 +72,35 @@ public class BookingRoom {
         this.createBookingDay = createBookingDay;
     }
 
-    public Date getStartTime() {
+    public Date getStartDay() {
+        return startDay;
+    }
+
+    public void setStartDay(Date startDay) {
+        this.startDay = startDay;
+    }
+
+    public Date getEndDay() {
+        return endDay;
+    }
+
+    public void setEndDay(Date endDay) {
+        this.endDay = endDay;
+    }
+
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
 
