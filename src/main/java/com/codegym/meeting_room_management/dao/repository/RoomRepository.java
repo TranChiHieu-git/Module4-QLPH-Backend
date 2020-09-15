@@ -18,7 +18,7 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
             Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
     );
 
-    Page<Room> findAllByNameContainingAndFloorLessThanEqualAndCapacityLessThanEqualAndAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(
+    Page<Room> findAllByNameContainingAndFloorLessThanEqualAndCapacityLessThanEqualAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(
             Pageable pageable, String name, Integer floor, Integer capacity, String typeRoom, String region, String status
     );
 

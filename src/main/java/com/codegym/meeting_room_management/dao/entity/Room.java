@@ -32,6 +32,7 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "id_status")
     private Status status;
+
     public Room() {
     }
 
