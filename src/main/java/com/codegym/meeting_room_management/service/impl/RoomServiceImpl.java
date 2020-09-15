@@ -48,17 +48,17 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public Page<Room> searchFloorNull(Pageable pageable, String name, Integer capacity, String typeRoom, String region, String status) {
-        return roomRepository.findAllByNameContainingAndFloorLessThanEqualAndCapacityAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(pageable, name, 20, capacity, typeRoom, region, status);
+        return roomRepository.findAllByNameContainingAndFloorLessThanEqualAndCapacityAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(pageable, name, 50, capacity, typeRoom, region, status);
     }
 
     @Override
     public Page<Room> searchCapacityNull(Pageable pageable, String name, Integer floor, String typeRoom, String region, String status) {
-        return roomRepository.findAllByNameContainingAndFloorAndCapacityLessThanEqualAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(pageable, name, floor, 20, typeRoom, region, status);
+        return roomRepository.findAllByNameContainingAndFloorAndCapacityLessThanEqualAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(pageable, name, floor, 50, typeRoom, region, status);
     }
 
     @Override
     public Page<Room> searchAllNull(Pageable pageable, String name, String typeRoom, String region, String status) {
-        return roomRepository.findAllByNameContainingAndFloorLessThanEqualAndCapacityLessThanEqualAndAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(pageable, name, 20, 20, typeRoom, region, status);
+        return roomRepository.findAllByNameContainingAndFloorLessThanEqualAndCapacityLessThanEqualAndTypeRoom_NameTypeRoomContainingAndRegion_NameContainingAndStatus_NameContainingAndDeleteFlagIsFalse(pageable, name, 50, 50, typeRoom, region, status);
     }
 
     @Override
